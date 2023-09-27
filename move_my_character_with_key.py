@@ -1,6 +1,7 @@
 from pico2d import *
 
 TUK_WIDTH, TUK_HEIGHT=1280, 1024
+CHARACTER_WIDTH, CHARACTER_HEIGHT = 146, 148
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('sprite.png')
@@ -62,6 +63,14 @@ while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH//2, TUK_HEIGHT//2)
 
+    if x < CHARACTER_WIDTH // 2:
+        x = CHARACTER_WIDTH // 2
+    elif x > TUK_WIDTH - CHARACTER_WIDTH // 2:
+        x = TUK_WIDTH - CHARACTER_WIDTH // 2
+    if y < CHARACTER_HEIGHT // 2 :
+        y = CHARACTER_HEIGHT // 2
+    elif y > TUK_HEIGHT - CHARACTER_HEIGHT // 2:
+        y = TUK_HEIGHT - CHARACTER_HEIGHT // 2
 
     character.clip_draw(frame * 146, sprite_col * 148, 146, 148, x, y)
     update_canvas()
