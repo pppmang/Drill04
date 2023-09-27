@@ -76,8 +76,8 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 12
-    x += dx * 7
-    y += dy * 7
+    x += dx * 10
+    y += dy * 10
     delay(0.05)
 
 
