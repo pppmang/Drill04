@@ -5,6 +5,36 @@ open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('sprite.png')
 
+def handle_events():
+    global running, dx, dy
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_LEFT:
+                dx -= 1
+            elif event.key == SDLK_UP:
+                dy += 1
+            elif event.key == SDLK_DOWN:
+                dy -= 1
+            elif event.key == SDLK_RIGHT:
+                dx += 1
+                
+            elif event.key == SDLK_ESCAPE:
+                running = False
+                
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_RIGHT:
+                dx -= 1
+            elif event.key == SDLK_LEFT:
+                dx += 1
+            elif event.key == SDLK_UP:
+                dy -= 1
+            elif event.key == SDLK_DOWN:
+                dy += 1
+
+
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
@@ -17,8 +47,10 @@ while running:
 
     character.clip_draw(frame * 146, sprite_col * 148, 146, 148, x, y)
     update_canvas()
-
+    handle_events()
     frame = (frame + 1) % 12
+    x += dx * 7
+    y += dy * 7
     delay(0.05)
 
 
