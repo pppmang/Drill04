@@ -6,7 +6,7 @@ tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('sprite.png')
 
 def handle_events():
-    global running, dx, dy
+    global running, dx, dy, sprite_col
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -20,6 +20,23 @@ def handle_events():
                 dy -= 1
             elif event.key == SDLK_RIGHT:
                 dx += 1
+
+            if dx == -1 and dy == 1:
+                sprite_col = 0
+            elif dx == -1 and dy == -1:
+                sprite_col = 2
+            elif dx == 1 and dy == 1:
+                sprite_col = 6
+            elif dx == 1 and dy == -1:
+                sprite_col = 4
+            elif dx == -1:
+                sprite_col = 1
+            elif dx == 1:
+                sprite_col = 5
+            elif dy == 1:
+                sprite_col = 7
+            elif dy == -1:
+                sprite_col = 3
                 
             elif event.key == SDLK_ESCAPE:
                 running = False
@@ -38,6 +55,7 @@ def handle_events():
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
+dx, dy = 0, 0
 sprite_col=0
 
 while running:
